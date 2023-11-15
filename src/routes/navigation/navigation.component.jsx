@@ -1,5 +1,6 @@
 import { Outlet, NavLink } from 'react-router-dom'
 import { ReactComponent as Crown } from '../../assets/crown.svg'
+import './navigation.styles.scss'
 
 function Navigation() {
   return (
@@ -10,7 +11,7 @@ function Navigation() {
         </NavLink>
         <div className="nav-links-container">
           <NavLink className="nav-link" to="/shop">
-            Shop
+            SHOP
           </NavLink>
         </div>
       </div>
