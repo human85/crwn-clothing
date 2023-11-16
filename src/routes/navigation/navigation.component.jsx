@@ -13,6 +13,9 @@ function Navigation() {
           <NavLink className="nav-link" to="/shop">
             SHOP
           </NavLink>
+          <NavLink className="nav-link" to="/auth">
+            SIGNIN
+          </NavLink>
         </div>
       </div>
       <Outlet />
