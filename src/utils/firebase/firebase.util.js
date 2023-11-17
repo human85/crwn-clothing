@@ -6,7 +6,9 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
 } from 'firebase/auth'
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore'
 
@@ -17,7 +19,7 @@ const firebaseConfig = {
   projectId: 'crwn-clothing-d1e7d',
   storageBucket: 'crwn-clothing-d1e7d.appspot.com',
   messagingSenderId: '573642915932',
-  appId: '1:573642915932:web:c3dde4f1f4df45944e2699'
+  appId: '1:573642915932:web:c3dde4f1f 4df45944e2699'
 }
 
 // Initialize Firebase
@@ -35,7 +37,7 @@ export const auth = getAuth()
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider)
 // 当前页面跳转登录
 export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider)
-
+// 获取 firestore 数据库实例
 export const db = getFirestore()
 
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation) => {
@@ -64,14 +66,21 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
   return userDocRef
 }
 
+// 根据邮箱与密码创建用户
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return
 
   return await createUserWithEmailAndPassword(auth, email, password)
 }
 
-export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+// 通过邮箱密码登录
+export const signInAuthUserWithEmailAndPassword = (email, password) => {
   if (!email || !password) return
 
-  return await signInWithEmailAndPassword(auth, email, password)
+  return signInWithEmailAndPassword(auth, email, password)
 }
+
+// 退出登录
+export const signOutUser = () => signOut(auth)
+
+export const onAuthStateChangedListener = callback => onAuthStateChanged(auth, callback)

@@ -2,18 +2,14 @@ import './sign-in-form.styles.scss'
 import FormInput from '../form-input/form-input.component'
 import { useState } from 'react'
 import Button from '../button/button.component'
-import {
-  signInWithGooglePopup,
-  createUserDocumentFromAuth,
-  signInAuthUserWithEmailAndPassword
-} from '../../utils/firebase/firebase.util'
+import { signInWithGooglePopup, signInAuthUserWithEmailAndPassword } from '../../utils/firebase/firebase.util'
 
 const defaultFormfields = {
   email: '',
   password: ''
 }
 
-const SignInForm = () => {
+function SignInForm() {
   const [formFields, setFormFields] = useState(defaultFormfields)
   const { email, password } = formFields
 
@@ -32,20 +28,18 @@ const SignInForm = () => {
 
   // google 登录
   async function signInWithGoogle() {
-    const { user } = await signInWithGooglePopup()
-    await createUserDocumentFromAuth(user)
+    await signInWithGooglePopup()
   }
 
   // 账号密码登录
   const handleSubmit = async e => {
     e.preventDefault()
-
-    const res = await signInAuthUserWithEmailAndPassword(email, password)
-    console.log(res)
-
     try {
+      await signInAuthUserWithEmailAndPassword(email, password)
       resetFormFields()
-    } catch (error) {}
+    } catch (error) {
+      alert(error.code)
+    }
   }
 
   return (
