@@ -1,0 +1,98 @@
+.time-selector {
+  .progress-container {
+    --progress-bg-color: #d9d9d9; // 进度条总长度背景色
+    --progress-finished-color: #ff9900; // 进度条已完成长度的颜色
+    --progress-height: 2px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    width: 370px;
+
+    progress {
+      width: 370px;
+      height: var(--progress-height);
+      // IE10及以上：
+      background: var(--progress-bg-color);
+      color: var(--progress-finished-color);
+
+      // Chrome
+      &::-webkit-progress-bar {
+        background: var(--progress-bg-color);
+      }
+      &::-webkit-progress-value {
+        background: var(--progress-finished-color);
+      }
+
+      // Firefox
+      &::-moz-progress-bar {
+        background: var(--progress-bg-color);
+      }
+    }
+
+    .progress-dots {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      translate: 0 calc(-50% - var(--progress-height) / 2);
+
+      .outer-dot {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+
+        &.large-orange {
+          width: 14px;
+          height: 14px;
+          background-color: #ff9900;
+          border-radius: 4px;
+        }
+
+        &.small-orange {
+          background-color: #ff9900;
+
+          .inner-dot {
+            width: 4px;
+            height: 4px;
+          }
+        }
+
+        &:first-child {
+          translate: -50% 0;
+        }
+
+        &:last-child {
+          translate: 50% 0;
+        }
+
+        .inner-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background-color: #b2b2b2;
+
+          &.white {
+            background-color: #fff;
+          }
+        }
+      }
+    }
+  }
+
+  .times-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 12px;
+
+    .orange {
+      color: #ff9900;
+      font-weight: 700;
+    }
+  }
+}

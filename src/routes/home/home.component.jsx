@@ -1,4 +1,5 @@
 import Directory from '../../components/directory/directory.component'
+import TimeSlector from './steps'
 
 function Home() {
   const categories = [
@@ -29,7 +30,14 @@ function Home() {
     }
   ]
 
-  return <Directory categories={categories} />
+  return (
+    <>
+      <Directory categories={categories} />
+      <div style={{ width: '480px', padding: '32px' }}>
+        <TimeSlector />
+      </div>
+    </>
+  )
 }
 
 export default Home
